@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <link rel="stylesheet" type="text/css" href="Css/Css.css">
+    <link rel="stylesheet" type="text/css" href="Css/danddcss.css">
+    <link rel="stylesheet" type="text/css" href="Css/dropdownmenu.css">
+
+    <script type="text/javascript" src="Javascript/draganddrop.js"></script>
+    <script type="text/javascript" src="Javascript/jquery-1.11.1.js"></script>
+
+
+    <meta charset="UTF-8">
+
+    <title></title>
+</head>
+<body>
+    <div id="container">
+        <canvas id="myCanvas" width=900 height=900 style="border:1px solid #000000;">
+
+        </canvas>
+        <img src="images/mid.jpg" class="dragclass" style="top:500px;left:500px;padding:0px;position: absolute;"/>
+        <div id = "controls">
+
+
+
+
+           <div id="Drop_down_wrapper">
+                <ul>
+                    <li><input id="lineBtn" type="image" onclick="setFunction('line')" src ='images/line.jpg'></li>
+                    <li><input id="dangerBtn" type="image" onclick="setFunction('danger')" src ='images/pingDanger.jpg'></li>
+                    <li><input id="refreshBtn" type="image" onclick="refresh()" src ="images/refresh.jpg"></li>
+                    <li><img src="images/greenward.jpg" id="wardDrop">
+                        <ul id="sub-menu1">
+                            <li><input  type = "image" src="images/greenward.jpg" onclick="setFunction('greenWard')"></li>
+                            <li><input  type = "image" src="images/pinkward.jpg" onclick="setFunction('pinkWard')"></li>
+                        </ul>
+                    </li>
+                </ul>
+           </div>
+        </div>
+
+
+
+    </div>
+    <script type="text/javascript" src="Javascript/javascript.js"></script>
+    <script type="text/javascript" src="Javascript/dropdownmenu.js"></script>
+</body>
+</html>
