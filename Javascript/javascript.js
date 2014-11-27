@@ -28,6 +28,7 @@ function setFunction(setTo){
         drawType = 'pinkWard'
         document.getElementById("wardDrop").setAttribute("src","images/pinkward.jpg")
         outlineBtn("wardDrop")
+        hideDropdown()
         resetCoords()
     }
 
@@ -36,6 +37,7 @@ function setFunction(setTo){
         drawType = 'greenWard'
         document.getElementById("wardDrop").setAttribute("src","images/greenward.jpg")
         outlineBtn("wardDrop")
+        hideDropdown()
         resetCoords()
     }
     else if(setTo == "line"){
