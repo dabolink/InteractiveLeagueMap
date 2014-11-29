@@ -17,16 +17,16 @@ img.onload = function(){
 }
 
 
-function item(type,x,y,x2,y2){
+function Item(type,x,y,x2,y2){
     this.type = type;
     this.x = x;
     this.y = y;
     this.x2 = x2;
     this.y2 = y2;
     this.print = function(){
-        var str = "" + this.type + this.x + this.y;
+        var str = "" + this.type + "/" + this.x + "/" + this.y;
         if(x2 != undefined){
-            str += this.x2 + this.y2;
+            str += this.x2 + "/" + this.y2;
         }
         return str;
     };
@@ -136,7 +136,7 @@ function getPosition(event) {
     //draws Image on Canvas centered on mouse click
     function draw(ping) {
         ctx.drawImage(ping, event.x - c.offsetLeft - ping.width / 2, event.y - c.offsetTop - ping.height / 2);
-        items.push(new item(drawType, event.x - c.offsetLeft - ping.width / 2, event.y - c.offsetTop - ping.height / 2));
+        items.push(new Item(drawType, event.x - c.offsetLeft - ping.width / 2, event.y - c.offsetTop - ping.height / 2));
     }
 
     //draws images depending on drawType set
@@ -193,7 +193,7 @@ function getPosition(event) {
             ctx.strokeStyle = color;
             ctx.stroke();
             console.log("line from " + coords[0] + ":" + coords[1] + " to " + event.x + ":"  + event.y);
-            items.push(new item("line",coords[0],coords[1],event.x - c.offsetLeft, event.y - c.offsetTop))
+            items.push(new Item("line",coords[0],coords[1],event.x - c.offsetLeft, event.y - c.offsetTop))
         }
         resetCoords();
     }
@@ -212,6 +212,40 @@ function undo(){
     ctx.clearRect(0,0, c.width, c.height);
     ctx.drawImage(img,0,0,size,size);
     items.pop();
+    drawItems();
+}
+
+function resetCoords(){
+    coords[0] = -1;
+    coords[1] = -1;
+}
+function save(){
+    var str = "";
+    for(var i = 0; i < items.length; i++){
+        str += items[i].print() + ";"
+    }
+    str = str.substring(0, str.length - 1);
+    window.prompt("Copy to clipboard: Ctrl+C, Enter", str);
+}
+function load() {
+    // TODO: add error handling
+    items = [];
+    var input = window.prompt("Paste Code", "");
+    var split1 = input.split(";");
+    console.log(split1.length);
+    for(var i = 0; i < split1.length; i++) {
+
+        var split2 = split1[i].split("/");
+        if (split2[0] == "line") {
+            items.push(new Item(split2[0], split2[1], split2[2], split2[3], split2[4]));
+        }
+        else {
+            items.push(new Item(split2[0], split2[1], split2[2]));
+        }
+    }
+    drawItems()
+}
+function drawItems(){
     for(var i = 0; i < items.length; i++){
         var ping = new Image();
         var item = items[i];
@@ -232,16 +266,5 @@ function undo(){
             console.log("line");
         }
         ctx.drawImage(ping, items[i].x, items[i].y);
-
-    }
-}
-
-function resetCoords(){
-    coords[0] = -1;
-    coords[1] = -1;
-}
-function test(){
-    for(var i = 0; i < items.length; i++){
-        console.log(items[i].print());
     }
 }
