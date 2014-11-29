@@ -39,13 +39,13 @@ function setFunction(setTo){
         }
         outlineBtn("wardDrop");
         hideDropdown("wardDrop");
-        resetCoords()
+        resetCoords();
     }
     else if(setTo == "line"){
         console.log("line set");
         drawType = 'line';
         outlineBtn("lineBtn");
-        resetCoords()
+        resetCoords();
     }
     else if(setTo.substring(setTo.length - 4, setTo.length) == "Ping") {
         if (setTo == "assistPing") {
@@ -97,8 +97,22 @@ function setFunction(setTo){
         console.log("O.o");
     }
 }
-
+myCanvas.addEventListener("mouseup", checkDrag, false);
 myCanvas.addEventListener("mousedown", getPosition, false);
+
+function checkDrag(event){
+    if(event.x != coords[0] && event.y != coords[1] && coords[0] != -1 && coords[1] != -1){
+        //then draw a line
+        ctx.beginPath();
+        ctx.moveTo(coords[0],coords[1]);
+        ctx.lineTo(event.x - c.offsetLeft, event.y - c.offsetTop);
+        ctx.strokeStyle = color;
+        ctx.stroke();
+        console.log("line from " + coords[0] + ":" + coords[1] + " to " + event.x + ":"  + event.y + " dragged");
+        resetCoords()
+    }
+    //else do nothing
+}
 
 function getPosition(event) {
 
@@ -162,7 +176,6 @@ function getPosition(event) {
             ctx.stroke();
             console.log("line from " + coords[0] + ":" + coords[1] + " to " + event.x + ":"  + event.y);
         }
-
         resetCoords();
     }
 }
