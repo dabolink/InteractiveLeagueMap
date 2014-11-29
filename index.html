@@ -18,10 +18,6 @@
         <canvas id="myCanvas" width=900 height=900 style="border:1px solid #000000;"></canvas>
         <img src="images/Map/mid.jpg" class="dragclass" style="top:500px;left:500px;padding:0px;position: absolute;"/>
         <div id = "controls">
-
-
-
-
            <div id="Drop_down_wrapper">
                 <ul>
                     <li><input id="lineBtn" type="image" onclick="setFunction('line')" src ='images/HUD/line.jpg'></li>
@@ -37,20 +33,19 @@
                             <li><input type="image" onclick="setFunction('defendPing')" src ='images/HUD/Pings/pingDefend.jpg'></li>
                         </ul>
                     </li>
-                    <li><img src="images/HUD/Wards/greenward.jpg" id="wardDrop">
+                    <li><img src="images/HUD/Wards/greenWard.jpg" id="wardDrop">
                         <ul id="sub-wardDrop">
-                            <li><input  type = "image" src="images/HUD/Wards/greenward.jpg" onclick="setFunction('greenWard')"></li>
-                            <li><input  type = "image" src="images/HUD/Wards/pinkward.jpg" onclick="setFunction('pinkWard')"></li>
+                            <li><input  type = "image" src="images/HUD/Wards/greenWard.jpg" onclick="setFunction('greenWard')"></li>
+                            <li><input  type = "image" src="images/HUD/Wards/pinkWard.jpg" onclick="setFunction('pinkWard')"></li>
                         </ul>
                     </li>
                     <li><input id="refreshBtn" type="image" onclick="refresh()" src ="images/HUD/refresh.jpg"></li>
+                    <li><input id="undoBtn" type="image" onclick="undo()" src ="images/HUD/undo.jpg"></li>
                 </ul>
            </div>
         </div>
-
-
-
     </div>
+    <button onmouseup="test()">TEST</button>
     <script type="text/javascript" src="Javascript/javascript.js"></script>
     <script type="text/javascript" src="Javascript/dropdownmenu.js"></script>
 </body>

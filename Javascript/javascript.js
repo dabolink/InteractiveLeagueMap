@@ -1,19 +1,36 @@
 //[[lines],[pings]]
 var items = [[],[]];
 var coords = [-1,-1];
-var size = 900
-var color = "#FF0000"
-var drawType = 'test'
+var size = 900;
+var color = "#FF0000";
+var drawType = 'test';
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
-var img = new Image()
+var img = new Image();
+var items = new Array();
+img.src = "images/Map.jpg";
 
 img.onload = function(){
-    ctx.drawImage(img,0,0,size,size);
-    img.width = size;
-    img.height = size;
-};
-img.src = "images/Map.jpg";
+    img.width = 1000;
+    img.height = 1000;
+    ctx.drawImage(img,0,0, c.width, c.height);
+}
+
+
+function item(type,x,y,x2,y2){
+    this.type = type;
+    this.x = x;
+    this.y = y;
+    this.x2 = x2;
+    this.y2 = y2;
+    this.print = function(){
+        var str = "" + this.type + this.x + this.y;
+        if(x2 != undefined){
+            str += this.x2 + this.y2;
+        }
+        return str;
+    };
+}
 
 function setFunction(setTo){
     function outlineBtn(s) {
@@ -27,14 +44,14 @@ function setFunction(setTo){
         if (setTo == "pinkWard") {
             console.log("pinkWard set");
             drawType = 'pinkWard';
-            document.getElementById("wardDrop").setAttribute("src", "images/HUD/Wards/pinkward.jpg");
+            document.getElementById("wardDrop").setAttribute("src", "images/HUD/Wards/pinkWard.jpg");
 
         }
 
         else if (setTo == "greenWard") {
             console.log("greenWard set");
             drawType = 'greenWard';
-            document.getElementById("wardDrop").setAttribute("src", "images/HUD/Wards/greenward.jpg");
+            document.getElementById("wardDrop").setAttribute("src", "images/HUD/Wards/greenWard.jpg");
 
         }
         outlineBtn("wardDrop");
@@ -119,44 +136,45 @@ function getPosition(event) {
     //draws Image on Canvas centered on mouse click
     function draw(ping) {
         ctx.drawImage(ping, event.x - c.offsetLeft - ping.width / 2, event.y - c.offsetTop - ping.height / 2);
+        items.push(new item(drawType, event.x - c.offsetLeft - ping.width / 2, event.y - c.offsetTop - ping.height / 2));
     }
 
     //draws images depending on drawType set
     if (drawType.substring(drawType.length - 4, drawType.length) == "Ward") {
         var ward = new Image();
         if (drawType == "pinkWard") {
-            ward.src = "images/Map/Wards/pink-ward.jpg";
+            ward.src = "images/Map/Wards/pinkWard.jpg";
         }
         else if (drawType == "greenWard") {
-            ward.src = "images/Map/Wards/green-ward.jpg";
+            ward.src = "images/Map/Wards/greenWard.jpg";
         }
         draw(ward);
     }
     else if(drawType.substring(0,4) == "ping") {
         var ping = new Image();
         if (drawType == "pingDanger") {
-            ping.src = "images/Map/Pings/ping-danger.jpg";
+            ping.src = "images/Map/Pings/pingDanger.jpg";
         }
         else if (drawType == "pingOMW") {
-            ping.src = "images/Map/Pings/ping-OMW.jpg";
+            ping.src = "images/Map/Pings/pingOMW.jpg";
         }
         else if (drawType == "pingAssist") {
-            ping.src = "images/Map/Pings/ping-assist.jpg";
+            ping.src = "images/Map/Pings/pingAssist.jpg";
         }
         else if (drawType == "pingCaution") {
-            ping.src = "images/Map/Pings/ping-caution.jpg";
+            ping.src = "images/Map/Pings/pingCaution.jpg";
         }
         else if (drawType == "pingAttack") {
-            ping.src = "images/Map/Pings/ping-attack.jpg";
+            ping.src = "images/Map/Pings/pingAttack.jpg";
         }
         else if (drawType == "pingCommand") {
-            ping.src = "images/Map/Pings/ping-command.jpg";
+            ping.src = "images/Map/Pings/pingCommand.jpg";
         }
         else if (drawType == "pingDefend") {
-            ping.src = "images/Map/Pings/ping-defend.jpg";
+            ping.src = "images/Map/Pings/pingDefend.jpg";
         }
         else if (drawType == "pingMIA") {
-            ping.src = "images/Map/Pings/ping-mia.jpg";
+            ping.src = "images/Map/Pings/pingMIA.jpg";
         }
         else{
             console.log("error");
@@ -175,6 +193,7 @@ function getPosition(event) {
             ctx.strokeStyle = color;
             ctx.stroke();
             console.log("line from " + coords[0] + ":" + coords[1] + " to " + event.x + ":"  + event.y);
+            items.push(new item("line",coords[0],coords[1],event.x - c.offsetLeft, event.y - c.offsetTop))
         }
         resetCoords();
     }
@@ -182,12 +201,47 @@ function getPosition(event) {
 
 function refresh(){
     console.log("clear");
-    ctx.clearRect(0,0, c.width, c.width);
+    ctx.clearRect(0,0, c.width, c.height);
     ctx.drawImage(img,0,0,size,size);
     resetCoords();
+    items = [];
+}
+
+function undo(){
+    console.log("undo");
+    ctx.clearRect(0,0, c.width, c.height);
+    ctx.drawImage(img,0,0,size,size);
+    items.pop();
+    for(var i = 0; i < items.length; i++){
+        var ping = new Image();
+        var item = items[i];
+        var type = item.type;
+        console.log(type);
+        if(type.substring(0,4) == "ping"){
+            ping.src = "images/Map/Pings/" + type + ".jpg";
+        }
+        else if(type.substring(type.length - 4,type.length) == "Ward") {
+            ping.src = "images/Map/Wards/" + type + ".jpg"
+        }
+        else if(type == "line"){
+            ctx.beginPath();
+            ctx.moveTo(item.x,item.y);
+            ctx.lineTo(item.x2, item.y2);
+            ctx.strokeStyle = color;
+            ctx.stroke();
+            console.log("line");
+        }
+        ctx.drawImage(ping, items[i].x, items[i].y);
+
+    }
 }
 
 function resetCoords(){
     coords[0] = -1;
     coords[1] = -1;
+}
+function test(){
+    for(var i = 0; i < items.length; i++){
+        console.log(items[i].print());
+    }
 }
