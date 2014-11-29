@@ -118,64 +118,54 @@ function setFunction(setTo){
 
 myCanvas.addEventListener("mousedown", getPosition, false);
 
-function getPosition(event)
-{
+function getPosition(event) {
+
     //draws Image on Canvas centered on mouse click
-    function drawPing(ping) {
-        ctx.drawImage(ping,event.x- c.offsetLeft - ping.width/2,event.y- c.offsetTop - ping.height/2);
+    function draw(ping) {
+        ctx.drawImage(ping, event.x - c.offsetLeft - ping.width / 2, event.y - c.offsetTop - ping.height / 2);
     }
 
     //draws images depending on drawType set
-    if(drawType == "pinkWard") {
+    if (drawType.substring(drawType.length - 4, drawType.length) == "Ward") {
         var ward = new Image();
-        ward.src = "images/Map/Wards/pink-ward.jpg";
-        ctx.drawImage(ward, event.x - c.offsetLeft - ward.width / 2, event.y - c.offsetTop - ward.height / 2);
+        if (drawType == "pinkWard") {
+            ward.src = "images/Map/Wards/pink-ward.jpg";
+        }
+        else if (drawType == "greenWard") {
+            ward.src = "images/Map/Wards/green-ward.jpg";
+        }
+        draw(ward);
     }
-    else if(drawType == "greenWard"){
-        var ward = new Image();
-        ward.src = "images/Map/Wards/green-ward.jpg";
-        ctx.drawImage(ward,event.x- c.offsetLeft - ward.width/2,event.y- c.offsetTop - ward.height/2);
-    }
-    else if(drawType == "pingDanger"){
-        var danger = new Image();
-        danger.src = "images/Map/Pings/ping-danger.jpg";
-        drawPing(danger)
-        console.log("danger!");
-    }
-    else if(drawType == "pingOMW"){
-        var OMW = new Image();
-        OMW.src = "images/Map/Pings/ping-OMW.jpg";
-        drawPing(OMW)
-    }
-    else if(drawType == "pingAssist"){
+    else if(drawType.substring(0,4) == "ping") {
         var ping = new Image();
-        ping.src = "images/Map/Pings/ping-assist.jpg"
-        drawPing(ping)
-    }
-    else if(drawType == "pingCaution"){
-        var ping = new Image();
-        ping.src = "images/Map/Pings/ping-caution.jpg"
-        drawPing(ping)
-    }
-    else if(drawType == "pingAttack"){
-        var ping = new Image();
-        ping.src = "images/Map/Pings/ping-attack.jpg"
-        drawPing(ping)
-    }
-    else if(drawType == "pingCommand"){
-        var ping = new Image();
-        ping.src = "images/Map/Pings/ping-command.jpg"
-        drawPing(ping)
-    }
-    else if(drawType == "pingDefend"){
-        var ping = new Image();
-        ping.src = "images/Map/Pings/ping-defend.jpg"
-        drawPing(ping)
-    }
-    else if(drawType == "pingMIA"){
-        var ping = new Image();
-        ping.src = "images/Map/Pings/ping-mia.jpg"
-        drawPing(ping)
+        if (drawType == "pingDanger") {
+            ping.src = "images/Map/Pings/ping-danger.jpg";
+        }
+        else if (drawType == "pingOMW") {
+            ping.src = "images/Map/Pings/ping-OMW.jpg";
+        }
+        else if (drawType == "pingAssist") {
+            ping.src = "images/Map/Pings/ping-assist.jpg";
+        }
+        else if (drawType == "pingCaution") {
+            ping.src = "images/Map/Pings/ping-caution.jpg";
+        }
+        else if (drawType == "pingAttack") {
+            ping.src = "images/Map/Pings/ping-attack.jpg";
+        }
+        else if (drawType == "pingCommand") {
+            ping.src = "images/Map/Pings/ping-command.jpg";
+        }
+        else if (drawType == "pingDefend") {
+            ping.src = "images/Map/Pings/ping-defend.jpg";
+        }
+        else if (drawType == "pingMIA") {
+            ping.src = "images/Map/Pings/ping-mia.jpg";
+        }
+        else{
+            console.log("error");
+        }
+        draw(ping);
     }
     else if(coords[0] == -1 && coords[1] == -1 && drawType == "line") {
         coords[0] = event.x;
