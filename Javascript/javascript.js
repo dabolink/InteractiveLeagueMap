@@ -26,7 +26,7 @@ function Item(type,x,y,x2,y2){
     this.print = function(){
         var str = "" + this.type + "/" + this.x + "/" + this.y;
         if(x2 != undefined){
-            str += this.x2 + "/" + this.y2;
+            str += "/" + this.x2 + "/" + this.y2;
         }
         return str;
     };
@@ -126,6 +126,7 @@ function checkDrag(event){
         ctx.strokeStyle = color;
         ctx.stroke();
         console.log("line from " + coords[0] + ":" + coords[1] + " to " + event.x + ":"  + event.y + " dragged");
+        items.push(new Item("line",coords[0],coords[1],event.x - c.offsetLeft, event.y - c.offsetTop))
         resetCoords()
     }
     //else do nothing
@@ -193,7 +194,7 @@ function getPosition(event) {
             ctx.strokeStyle = color;
             ctx.stroke();
             console.log("line from " + coords[0] + ":" + coords[1] + " to " + event.x + ":"  + event.y);
-            items.push(new Item("line",coords[0],coords[1],event.x - c.offsetLeft, event.y - c.offsetTop))
+            items.push(new Item("line",coords[0],coords[1],event.x - c.offsetLeft, event.y - c.offsetTop));
         }
         resetCoords();
     }
@@ -232,7 +233,6 @@ function load() {
     items = [];
     var input = window.prompt("Paste Code", "");
     var split1 = input.split(";");
-    console.log(split1.length);
     for(var i = 0; i < split1.length; i++) {
 
         var split2 = split1[i].split("/");
@@ -246,16 +246,18 @@ function load() {
     drawItems()
 }
 function drawItems(){
+    printItems();
     for(var i = 0; i < items.length; i++){
         var ping = new Image();
         var item = items[i];
         var type = item.type;
-        console.log(type);
         if(type.substring(0,4) == "ping"){
             ping.src = "images/Map/Pings/" + type + ".jpg";
+            ctx.drawImage(ping, items[i].x, items[i].y);
         }
         else if(type.substring(type.length - 4,type.length) == "Ward") {
-            ping.src = "images/Map/Wards/" + type + ".jpg"
+            ping.src = "images/Map/Wards/" + type + ".jpg";
+            ctx.drawImage(ping, items[i].x, items[i].y);
         }
         else if(type == "line"){
             ctx.beginPath();
@@ -263,8 +265,12 @@ function drawItems(){
             ctx.lineTo(item.x2, item.y2);
             ctx.strokeStyle = color;
             ctx.stroke();
-            console.log("line");
         }
-        ctx.drawImage(ping, items[i].x, items[i].y);
+
+    }
+}
+function printItems(){
+    for(var i = 0; i < items.length; i++){
+        console.log(items[i].print());
     }
 }
