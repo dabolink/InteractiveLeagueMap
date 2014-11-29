@@ -16,7 +16,7 @@
 <body>
     <div id="container">
         <canvas id="myCanvas" width=900 height=900 style="border:1px solid #000000;"></canvas>
-        <img src="images/mid.jpg" class="dragclass" style="top:500px;left:500px;padding:0px;position: absolute;"/>
+        <img src="images/Map/mid.jpg" class="dragclass" style="top:500px;left:500px;padding:0px;position: absolute;"/>
         <div id = "controls">
 
 
@@ -24,21 +24,31 @@
 
            <div id="Drop_down_wrapper">
                 <ul>
-                    <li><input id="lineBtn" type="image" onclick="setFunction('line')" src ='images/line.jpg'></li>
-                    <li><img src = "images/pingDanger.jpg" id="pingDrop">
+                    <li><input id="lineBtn" type="image" onclick="setFunction('line')" src ='images/HUD/line.jpg'></li>
+                    <li><img src = "images/HUD/Pings/pingDanger.jpg" id="pingDrop">
                         <ul id = "sub-pingDrop">
-                            <li><input type="image" onclick="setFunction('dangerPing')" src ='images/pingDanger.jpg'></li>
-                            <li><input type="image" onclick="setFunction('OMWPing')" src ='images/pingOMW.jpg'></li>
-                            <!--<li><input type="image" onclick="setFunction('AssistPing')" src ='images/ping.jpg'></li>-->
+                            <li><input type="image" onclick="setFunction('dangerPing')" src ='images/HUD/Pings/pingDanger.jpg'></li>
+                            <li><input type="image" onclick="setFunction('OMWPing')" src ='images/HUD/Pings/pingOMW.jpg'></li>
+                            <li><input type="image" onclick="setFunction('assistPing')" src ='images/HUD/Pings/pingAssist.jpg'></li>
+                            <li><input type="image" onclick="setFunction('attackPing')" src ='images/HUD/Pings/pingAttack.jpg'></li>
+                            <!--
+                                forget the acutal name
+                                <li><input type="image" onclick="setFunction('commandPing')" src ='images/HUD/ping.jpg'></li>
+                                -->
+                            <li><input type="image" onclick="setFunction('missingPing')" src ='images/HUD/Pings/pingMia.jpg'></li>
+                            <li><input type="image" onclick="setFunction('cautionPing')" src ='images/HUD/Pings/pingCaution.jpg'></li>
+                            <li><input type="image" onclick="setFunction('defendPing')" src ='images/HUD/Pings/pingDefend.jpg'></li>
+
+
                         </ul>
                     </li>
-                    <li><img src="images/greenward.jpg" id="wardDrop">
+                    <li><img src="images/HUD/Wards/greenward.jpg" id="wardDrop">
                         <ul id="sub-wardDrop">
-                            <li><input  type = "image" src="images/greenward.jpg" onclick="setFunction('greenWard')"></li>
-                            <li><input  type = "image" src="images/pinkward.jpg" onclick="setFunction('pinkWard')"></li>
+                            <li><input  type = "image" src="images/HUD/Wards/greenward.jpg" onclick="setFunction('greenWard')"></li>
+                            <li><input  type = "image" src="images/HUD/Wards/pinkward.jpg" onclick="setFunction('pinkWard')"></li>
                         </ul>
                     </li>
-                    <li><input id="refreshBtn" type="image" onclick="refresh()" src ="images/refresh.jpg"></li>
+                    <li><input id="refreshBtn" type="image" onclick="refresh()" src ="images/HUD/refresh.jpg"></li>
                 </ul>
            </div>
         </div>

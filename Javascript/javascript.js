@@ -26,7 +26,7 @@ function setFunction(setTo){
     if(setTo == "pinkWard"){
         console.log("pinkWard set");
         drawType = 'pinkWard';
-        document.getElementById("wardDrop").setAttribute("src","images/pinkward.jpg");
+        document.getElementById("wardDrop").setAttribute("src","images/HUD/Wards/pinkward.jpg");
         outlineBtn("wardDrop");
         hideDropdown("wardDrop");
         resetCoords()
@@ -35,7 +35,7 @@ function setFunction(setTo){
     else if(setTo == "greenWard"){
         console.log("greenWard set");
         drawType = 'greenWard';
-        document.getElementById("wardDrop").setAttribute("src","images/greenward.jpg");
+        document.getElementById("wardDrop").setAttribute("src","images/HUD/Wards/greenward.jpg");
         outlineBtn("wardDrop");
         hideDropdown("wardDrop");
         resetCoords()
@@ -46,10 +46,59 @@ function setFunction(setTo){
         outlineBtn("lineBtn");
         resetCoords()
     }
+    else if(setTo == "assistPing"){
+        console.log("Assist ping set");
+        drawType = 'pingAssist';
+        document.getElementById("pingDrop").setAttribute("src","images/HUD/Pings/pingAssist.jpg");
+        outlineBtn("pingDrop");
+        hideDropdown("pingDrop");
+        resetCoords();
+    }
+    else if(setTo == "attackPing"){
+        console.log("Attack ping set");
+        drawType = 'pingAttack';
+        document.getElementById("pingDrop").setAttribute("src","images/HUD/Pings/pingAttack.jpg");
+        outlineBtn("pingDrop");
+        hideDropdown("pingDrop");
+        resetCoords();
+    }
+
+    else if(setTo == "cautionPing"){
+        console.log("Caution ping set");
+        drawType = 'pingCaution';
+        document.getElementById("pingDrop").setAttribute("src","images/HUD/Pings/pingCaution.jpg");
+        outlineBtn("pingDrop");
+        hideDropdown("pingDrop");
+        resetCoords();
+    }
+    else if(setTo == "commandPing"){
+        console.log("Command ping set");
+        drawType = 'pingCommand';
+        document.getElementById("pingDrop").setAttribute("src","images/HUD/Pings/pingCommand.jpg");
+        outlineBtn("pingDrop");
+        hideDropdown("pingDrop");
+        resetCoords();
+    }
+    else if(setTo == "defendPing"){
+        console.log("Defend ping set");
+        drawType = 'pingDefend';
+        document.getElementById("pingDrop").setAttribute("src","images/HUD/Pings/pingDefend.jpg");
+        outlineBtn("pingDrop");
+        hideDropdown("pingDrop");
+        resetCoords();
+    }
+    else if(setTo == "missingPing"){
+        console.log("MIA ping set");
+        drawType = 'pingMIA';
+        document.getElementById("pingDrop").setAttribute("src","images/HUD/Pings/pingMIA.jpg");
+        outlineBtn("pingDrop");
+        hideDropdown("pingDrop");
+        resetCoords();
+    }
     else if(setTo == "dangerPing"){
         console.log("danger ping set");
         drawType = 'pingDanger';
-        document.getElementById("pingDrop").setAttribute("src","images/pingDanger.jpg");
+        document.getElementById("pingDrop").setAttribute("src","images/HUD/Pings/pingDanger.jpg");
         outlineBtn("pingDrop");
         hideDropdown("pingDrop");
         resetCoords();
@@ -59,7 +108,7 @@ function setFunction(setTo){
         drawType = 'pingOMW';
         outlineBtn("pingDrop");
         hideDropdown("pingDrop");
-        document.getElementById("pingDrop").setAttribute("src","images/pingOMW.jpg");
+        document.getElementById("pingDrop").setAttribute("src","images/HUD/Pings/pingOMW.jpg");
         resetCoords();
     }
     else{
@@ -79,24 +128,54 @@ function getPosition(event)
     //draws images depending on drawType set
     if(drawType == "pinkWard") {
         var ward = new Image();
-        ward.src = "images/pinkward.jpg";
+        ward.src = "images/Map/Wards/pink-ward.jpg";
         ctx.drawImage(ward, event.x - c.offsetLeft - ward.width / 2, event.y - c.offsetTop - ward.height / 2);
     }
     else if(drawType == "greenWard"){
         var ward = new Image();
-        ward.src = "images/greenward.jpg";
+        ward.src = "images/Map/Wards/green-ward.jpg";
         ctx.drawImage(ward,event.x- c.offsetLeft - ward.width/2,event.y- c.offsetTop - ward.height/2);
     }
     else if(drawType == "pingDanger"){
         var danger = new Image();
-        danger.src = "images/ping-danger.jpg";
+        danger.src = "images/Map/Pings/ping-danger.jpg";
         drawPing(danger)
         console.log("danger!");
     }
     else if(drawType == "pingOMW"){
         var OMW = new Image();
-        OMW.src = "images/ping-omw.jpg";
+        OMW.src = "images/Map/Pings/ping-OMW.jpg";
         drawPing(OMW)
+    }
+    else if(drawType == "pingAssist"){
+        var ping = new Image();
+        ping.src = "images/Map/Pings/ping-assist.jpg"
+        drawPing(ping)
+    }
+    else if(drawType == "pingCaution"){
+        var ping = new Image();
+        ping.src = "images/Map/Pings/ping-caution.jpg"
+        drawPing(ping)
+    }
+    else if(drawType == "pingAttack"){
+        var ping = new Image();
+        ping.src = "images/Map/Pings/ping-attack.jpg"
+        drawPing(ping)
+    }
+    else if(drawType == "pingCommand"){
+        var ping = new Image();
+        ping.src = "images/Map/Pings/ping-command.jpg"
+        drawPing(ping)
+    }
+    else if(drawType == "pingDefend"){
+        var ping = new Image();
+        ping.src = "images/Map/Pings/ping-defend.jpg"
+        drawPing(ping)
+    }
+    else if(drawType == "pingMIA"){
+        var ping = new Image();
+        ping.src = "images/Map/Pings/ping-mia.jpg"
+        drawPing(ping)
     }
     else if(coords[0] == -1 && coords[1] == -1 && drawType == "line") {
         coords[0] = event.x;
