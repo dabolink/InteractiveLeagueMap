@@ -14,8 +14,6 @@
     <title></title>
 </head>
 <body>
-    <div>
-    </div>
     <div id="container">
         <canvas id="myCanvas" width=900 height=900 style="border:1px solid #000000;"></canvas>
         <img src="images/mid.jpg" class="dragclass" style="top:500px;left:500px;padding:0px;position: absolute;"/>
@@ -27,14 +25,20 @@
            <div id="Drop_down_wrapper">
                 <ul>
                     <li><input id="lineBtn" type="image" onclick="setFunction('line')" src ='images/line.jpg'></li>
-                    <li><input id="dangerBtn" type="image" onclick="setFunction('danger')" src ='images/pingDanger.jpg'></li>
-                    <li><input id="refreshBtn" type="image" onclick="refresh()" src ="images/refresh.jpg"></li>
+                    <li><img src = "images/pingDanger.jpg" id="pingDrop">
+                        <ul id = "sub-pingDrop">
+                            <li><input type="image" onclick="setFunction('dangerPing')" src ='images/pingDanger.jpg'></li>
+                            <li><input type="image" onclick="setFunction('OMWPing')" src ='images/pingOMW.jpg'></li>
+                            <!--<li><input type="image" onclick="setFunction('AssistPing')" src ='images/ping.jpg'></li>-->
+                        </ul>
+                    </li>
                     <li><img src="images/greenward.jpg" id="wardDrop">
-                        <ul id="sub-menu1">
+                        <ul id="sub-wardDrop">
                             <li><input  type = "image" src="images/greenward.jpg" onclick="setFunction('greenWard')"></li>
                             <li><input  type = "image" src="images/pinkward.jpg" onclick="setFunction('pinkWard')"></li>
                         </ul>
                     </li>
+                    <li><input id="refreshBtn" type="image" onclick="refresh()" src ="images/refresh.jpg"></li>
                 </ul>
            </div>
         </div>

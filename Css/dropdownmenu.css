@@ -23,6 +23,7 @@ a {
     background: #333333;
     height: 20px;
     position: absolute;
+    border: 2px;
 }
 
 #Drop_down_wrapper ul > li {
