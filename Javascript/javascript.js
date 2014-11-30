@@ -143,6 +143,7 @@ function getPosition(event) {
     //draws images depending on drawType set
     if (drawType.substring(drawType.length - 4, drawType.length) == "Ward") {
         var ward = new Image();
+        console.log("ward placed");
         if (drawType == "pinkWard") {
             ward.src = "images/Map/Wards/pinkWard.jpg";
         }
@@ -153,6 +154,7 @@ function getPosition(event) {
     }
     else if(drawType.substring(0,4) == "ping") {
         var ping = new Image();
+        console.log("ping placed");
         if (drawType == "pingDanger") {
             ping.src = "images/Map/Pings/pingDanger.jpg";
         }
@@ -247,6 +249,8 @@ function load() {
 }
 function drawItems(){
     printItems();
+    ctx.beginPath();
+    ctx.stroke();
     for(var i = 0; i < items.length; i++){
         var ping = new Image();
         var item = items[i];
@@ -273,4 +277,12 @@ function printItems(){
     for(var i = 0; i < items.length; i++){
         console.log(items[i].print());
     }
+}
+
+function send(){
+    sendItemsToServer(items);
+}
+function receive(){
+    getItemsFromServer();
+    console.log(items);
 }
