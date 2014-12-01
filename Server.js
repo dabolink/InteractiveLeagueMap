@@ -12,6 +12,7 @@ app.post('/', function(req, res){
 });
 app.post('/sendItems', function(req, res){
     res.status(200).json({message: 'message recieved'});
+    items = [];
     for( var i = 0; i < req.body.items.length; i++){
         items.push(req.body.items[i]);
     }

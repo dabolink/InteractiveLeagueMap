@@ -9,6 +9,28 @@ var ctx = c.getContext("2d");
 var img = new Image();
 var items = new Array();
 img.src = "images/Map.jpg";
+var guest = true;
+
+function toggleClient(){
+    guest ^=  true;
+    var btn = document.getElementById("clientBtn");
+    if(guest) {
+        btn.textContent = "GUEST"
+    }
+    else{
+        btn.textContent = "HOST"
+    }
+}
+setInterval(function(){
+    if(guest){
+        console.log("guest");
+        receive();
+    }
+    else{
+        console.log("host");
+        send();
+    }
+},3000);
 
 img.onload = function(){
     img.width = 1000;
