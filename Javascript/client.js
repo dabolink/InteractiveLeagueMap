@@ -12,9 +12,21 @@ function serverPost(uri, keyPair, successFunction, async){
             alert('There was a problem.\n');
         }})
 }
-serverPost('',{}, function(result){
+serverPost('',{user: document.getElementById("text").name}, function(result){
     console.log(result.message);
-})
+});
+
+function getPositionsFromServer(){
+    serverPost('getPositions',{},function(result){
+       console.log(result.positions);
+        for(var i = 0; i < result.positions.length;i++){
+            var r = result.positions[i];
+            var d = document.getElementById(r.type);
+            d.style.top = r.top;
+            d.style.left = r.left;
+        }
+    });
+}
 
 function getItemsFromServer(){
     var temp = [];
@@ -30,12 +42,27 @@ function getItemsFromServer(){
         drawItems();
     }, false);
 }
+function sendPositionsToServer(){
+    var p = ["Mid","Jungle","Marksman","Support","Top"];
+    var json = {positions: []};
+    for(var i = 0; i < p.length; i++){
+        var t = document.getElementById("red"+p[i]);
+        json.positions.push({type: t.id, left: t.style.left, top:t.style.top})
+    }
+    for(var i = 0; i < p.length; i++){
+        var t = document.getElementById("blue"+p[i]);
+        json.positions.push({type: t.id, left: t.style.left, top:t.style.top})
+    }
+    serverPost('sendPositions',JSON.stringify(json), function(result){
+        console.log(result.message);
+    })
+}
 function sendItemsToServer(items){
     var json = {items: []};
     for(var i = 0; i < items.length; i++) {
         json.items.push({type: items[i].type, x: items[i].x, y: items[i].y, x2: items[i].x2, y2: items[i].y2});
     }
-    serverPost('sendItems',JSON.stringify(json), function(){
-        console.log("message recieved");
+    serverPost('sendItems',JSON.stringify(json), function(result){
+        console.log(result.message);
     })
 }

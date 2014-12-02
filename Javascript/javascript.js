@@ -1,4 +1,3 @@
-//[[lines],[pings]]
 var items = [[],[]];
 var coords = [-1,-1];
 var size = 900;
@@ -37,7 +36,11 @@ img.onload = function(){
     img.height = 1000;
     ctx.drawImage(img,0,0, c.width, c.height);
 }
-
+function Position(type, top, left){
+    this.type = type;
+    this.top = top;
+    this.left = left;
+}
 
 function Item(type,x,y,x2,y2){
     this.type = type;
@@ -303,8 +306,10 @@ function printItems(){
 
 function send(){
     sendItemsToServer(items);
+    sendPositionsToServer()
 }
 function receive(){
     getItemsFromServer();
+    getPositionsFromServer();
     console.log(items);
 }
