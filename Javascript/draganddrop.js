@@ -14,7 +14,11 @@ if  (document.getElementById){
             if (dragok){
                 d.style.left = dx + e.clientX - x + "px";
                 d.style.top  = dy + e.clientY - y + "px";
-                if(!guest) sendPositions();
+
+                if(!guest && typeof e.currentTarget != "undefined"){
+                    console.log(e.srcElement.id);
+                    sendPosition(e.srcElement.id);
+                }
                 return false;
             }
         }

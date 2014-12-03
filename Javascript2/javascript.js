@@ -12,16 +12,16 @@ var img = new Image();
 var items = new Array();
 img.src = "images/Map.jpg";
 var guest = true;
-var startPos = [ { type: 'redMid', left: '520px', top: '400px' },
-    { type: 'redJungle', left: '691px', top: '478px' },
-    { type: 'redMarksman', left: '800px', top: '707px' },
-    { type: 'redSupport', left: '772px', top: '674px' },
-    { type: 'redTop', left: '312px', top: '148px' },
-    { type: 'blueMid', left: '410px', top: '505px' },
-    { type: 'blueJungle', left: '261px', top: '412px' },
-    { type: 'blueMarksman', left: '690px', top: '798px' },
-    { type: 'blueSupport', left: '666px', top: '747px' },
-    { type: 'blueTop', left: '162px', top: '258px' } ];
+var startPos = {'redMid': {left: '520px', top: '400px' },
+    'redJungle': {left: '691px', top: '478px'},
+    'redMarksman': {left: '800px', top: '707px' },
+    'redSupport': {left: '772px', top: '674px' },
+    'redTop': {left: '312px', top: '148px' },
+    'blueMid': {left: '410px', top: '505px' },
+    'blueJungle': {left: '261px', top: '412px' },
+    'blueMarksman': {left: '690px', top: '798px' },
+    'blueSupport': {left: '666px', top: '747px' },
+    'blueTop': {left: '162px', top: '258px' } };
 update();
 function toggleClient(){
     guest ^=  true;
@@ -253,11 +253,12 @@ function undo(){
     drawItems();
 }
 function resetPos(){
-    for(var i = 0; i < startPos.length; i++){
-        var t = startPos[i];
-        var e = document.getElementById(t.type);
-        e.style.top = t.top;
-        e.style.left = t.left;
+    console.log(startPos);
+    for(var key in startPos){
+        console.log("keyyyyy " + key)
+        var e = document.getElementById(key);
+        e.style.top = startPos[key].top;
+        e.style.left = startPos[key].left;
     }
 }
 function resetCoords(){
@@ -336,11 +337,32 @@ function sendPositions(){
         sendPositionsToServer()
     }
 }
+function sendPosition(id){
+    console.log("sendingPosition...")
+    var e = document.getElementById(id);
+    var send = {}
+    send[id] = {top: e.style.top, left: e.style.left};
+    console.log(send)
+    socket.emit('sendPosition', send);
+
+}
+socket.on('getPosition', function(result){
+   console.log(result);
+   for(var key in result) {
+       console.log("key: " + key);
+       var r = result[key];
+       var d = document.getElementById(key);
+       d.style.top = r.top;
+       d.style.left = r.left;
+   }
+});
 socket.on('getPositions',function(result){
-    console.log(result.positions);
-    for(var i = 0; i < result.positions.length;i++){
-        var r = result.positions[i];
-        var d = document.getElementById(r.type);
+    console.log("result: " + result);
+    for(var key in result){
+        var r = result[key];
+        var d = document.getElementById(key);
+        console.log(key);
+        console.log(result[key]);
         d.style.top = r.top;
         d.style.left = r.left;
     }
@@ -373,7 +395,7 @@ socket.on('getUsers',function(result){
         s += t + "\n";
 
     }
-    $('#users').val(s);
+    $('#users').val(s.substring(0, s.length-1));
     $('#users').attr('rows',result.users.length);
 });
 socket.on('sendUser', function(){
