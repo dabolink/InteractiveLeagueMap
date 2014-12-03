@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <link rel="stylesheet" type="text/css" href="Css/Css.css">
+    <link rel="stylesheet" type="text/css" href="Css/danddcss.css">
+    <link rel="stylesheet" type="text/css" href="Css/dropdownmenu.css">
+
+    <script type="text/javascript" src="Javascript/draganddrop.js"></script>
+    <script type="text/javascript" src="Javascript/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="Javascript2/client.js"></script>
+
+
+    <meta charset="UTF-8">
+
+    <title></title>
+</head>
+<body>
+<div id="container">
+    <canvas id="myCanvas" width=900 height=900 style="border:1px solid #000000;"></canvas>
+    <textarea readonly class="users" id="users"></textarea>
+    <img id="blueMid" src="images/Map/Blue/Mid.jpg" class="dragclass" style="top:505px;left:410px;padding:0px;position: absolute;"/>
+    <img id="blueJungle" src="images/Map/Blue/Jungle.jpg" class="dragclass" style="top:412px;left:261px;padding:0px;position: absolute;"/>
+    <img id="blueTop" src="images/Map/Blue/Top.jpg" class="dragclass" style="top:258px;left:162px;padding:0px;position: absolute;"/>
+    <img id="blueMarksman" src="images/Map/Blue/Marksman.jpg" class="dragclass" style="top:798px;left:690px;padding:0px;position: absolute;"/>
+    <img id="blueSupport" src="images/Map/Blue/Support.jpg" class="dragclass" style="top:747px;left:666px;padding:0px;position: absolute;"/>
+
+    <img id="redMid" src="images/Map/Red/Mid.jpg" class="dragclass" style="top:400px;left:520px;padding:0px;position: absolute;"/>
+    <img id="redJungle" src="images/Map/Red/Jungle.jpg" class="dragclass" style="top: 478px; left: 691px; padding: 0px; position: absolute;">
+    <img id="redTop" src="images/Map/Red/Top.jpg" class="dragclass" style="top: 148px; left: 312px; padding: 0px; position: absolute;">
+    <img id="redMarksman" src="images/Map/Red/Marksman.jpg" class="dragclass" style="top:707px;left:800px;padding:0px;position: absolute;"/>
+    <img id="redSupport" src="images/Map/Red/Support.jpg" class="dragclass" style="top:674px;left:772px;padding:0px;position: absolute;"/>
+    <div id = "controls">
+        <div id="Drop_down_wrapper">
+            <ul>
+                <li><input id="lineBtn" type="image" onclick="setFunction('line')" src ='images/HUD/line.jpg'></li>
+                <li><img src = "images/HUD/Pings/pingDanger.jpg" id="pingDrop">
+                    <ul id = "sub-pingDrop">
+                        <li><input type="image" onclick="setFunction('dangerPing')" src ='images/HUD/Pings/pingDanger.jpg'></li>
+                        <li><input type="image" onclick="setFunction('OMWPing')" src ='images/HUD/Pings/pingOMW.jpg'></li>
+                        <li><input type="image" onclick="setFunction('assistPing')" src ='images/HUD/Pings/pingAssist.jpg'></li>
+                        <li><input type="image" onclick="setFunction('attackPing')" src ='images/HUD/Pings/pingAttack.jpg'></li>
+                        <li><input type="image" onclick="setFunction('commandPing')" src ='images/HUD/Pings/pingCommand.jpg'></li>
+                        <li><input type="image" onclick="setFunction('missingPing')" src ='images/HUD/Pings/pingMia.jpg'></li>
+                        <li><input type="image" onclick="setFunction('cautionPing')" src ='images/HUD/Pings/pingCaution.jpg'></li>
+                        <li><input type="image" onclick="setFunction('defendPing')" src ='images/HUD/Pings/pingDefend.jpg'></li>
+                    </ul>
+                </li>
+                <li><img src="images/HUD/Wards/greenWard.jpg" id="wardDrop">
+                    <ul id="sub-wardDrop">
+                        <li><input  type = "image" src="images/HUD/Wards/greenWard.jpg" onclick="setFunction('greenWard')"></li>
+                        <li><input  type = "image" src="images/HUD/Wards/pinkWard.jpg" onclick="setFunction('pinkWard')"></li>
+                    </ul>
+                </li>
+                <li><input id="refreshBtn" type="image" onclick="refresh()" src ="images/HUD/refresh.jpg"></li>
+                <li><input id="undoBtn" type="image" onclick="undo()" src ="images/HUD/undo.jpg"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<button onmouseup="save()">SAVE</button>
+<button onmouseup="load()">LOAD</button>
+<button id="clientBtn" onmouseup="toggleClient()">GUEST</button>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="Javascript2/javascript.js"></script>
+<script type="text/javascript" src="Javascript/dropdownmenu.js"></script>
+
+</body>
+</html>

@@ -1,9 +1,9 @@
 var connect = require('connect');
 var serveStatic = require('serve-static');
-var express = require("express");
-var app = express();
+var app = require("express")();
 var bodyParser = require('body-parser');
 
+//////////////////////////////////// EXPRESS ///////////////////////////////////////////////
 var items = [];
 var positions = [ { type: 'redMid', left: '520px', top: '400px' },
     { type: 'redJungle', left: '691px', top: '478px' },
@@ -15,13 +15,10 @@ var positions = [ { type: 'redMid', left: '520px', top: '400px' },
     { type: 'blueMarksman', left: '690px', top: '798px' },
     { type: 'blueSupport', left: '666px', top: '747px' },
     { type: 'blueTop', left: '162px', top: '258px' } ];
-var users = [];
-var userTimes = {};
 
 app.use(bodyParser.json());
+
 app.post('/', function(req, res){
-    user.push(req.body.user);
-    res.status(200).json({message: users});
 });
 
 app.post('/sendPositions', function(req, res){

@@ -12,7 +12,7 @@ function serverPost(uri, keyPair, successFunction, async){
             alert('There was a problem.\n');
         }})
 }
-serverPost('',{user: document.getElementById("text").name}, function(result){
+serverPost('',{}, function(result){
     console.log(result.message);
 });
 

@@ -14,6 +14,7 @@ if  (document.getElementById){
             if (dragok){
                 d.style.left = dx + e.clientX - x + "px";
                 d.style.top  = dy + e.clientY - y + "px";
+                if(!guest) sendPositions();
                 return false;
             }
         }
