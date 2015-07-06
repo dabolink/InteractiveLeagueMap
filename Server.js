@@ -5,6 +5,11 @@ var bodyParser = require('body-parser');
 
 //////////////////////////////////// EXPRESS ///////////////////////////////////////////////
 var items = [];
+
+var array = Array(20);
+var a = Array(20);
+array[0] = a
+
 var positions = [ { type: 'redMid', left: '520px', top: '400px' },
     { type: 'redJungle', left: '691px', top: '478px' },
     { type: 'redMarksman', left: '800px', top: '707px' },
